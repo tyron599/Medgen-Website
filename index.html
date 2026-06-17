@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medgen Industries | Accounting Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1C2B3A;
+      --navy-deep: #111E2A;
+      --teal:   #3ECFCF;
+      --teal-dark: #2BAEAE;
+      --white:  #FFFFFF;
+      --offwhite: #F4F7F9;
+      --grey:   #8A9AAA;
+      --text:   #2E3E4E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(28, 43, 58, 0.97);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(62,207,207,0.15);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+
+    .nav-logo .m-icon {
+      width: 38px; height: 38px;
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo .m-icon svg { width: 20px; height: 20px; }
+
+    .nav-logo .wordmark {
+      display: flex; flex-direction: column; line-height: 1;
+    }
+
+    .nav-logo .word-medgen {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.35rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+    }
+
+    .nav-logo .word-industries {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--teal);
+      margin-top: 2px;
+    }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal); color: var(--navy-deep) !important;
+      padding: 8px 20px; border-radius: 3px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-dark) !important; color: var(--navy-deep) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 60%, #1e3a4a 100%);
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(62,207,207,0.08);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute; top: 40px; right: 40px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 1px solid rgba(62,207,207,0.13);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 1px; background: var(--teal);
+    }
+
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.08; letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--teal); }
+
+    .hero p {
+      font-size: 1.05rem; line-height: 1.75; font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block; padding: 14px 32px;
+      background: var(--teal); color: var(--navy-deep);
+      font-weight: 600; font-size: 0.88rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 3px; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-block; padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);
+      font-weight: 500; font-size: 0.88rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 3px; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* hero visual panel */
+    .hero-visual {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(62,207,207,0.15);
+      border-radius: 6px;
+      padding: 22px 28px;
+      display: flex; align-items: center; gap: 18px;
+    }
+
+    .stat-card .icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(62,207,207,0.12);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .stat-card .icon svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 1.8; }
+
+    .stat-card .label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--grey);
+      margin-bottom: 4px;
+    }
+
+    .stat-card .value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.04em;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 96px 5%; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 16px;
+    }
+    .section-eyebrow::before {
+      content: ''; display: block; width: 24px; height: 1px; background: var(--teal);
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: clamp(1.9rem, 4vw, 2.8rem);
+      letter-spacing: 0.02em; line-height: 1.1;
+      color: var(--navy); margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1rem; line-height: 1.7; color: var(--grey);
+      max-width: 540px; margin-bottom: 56px;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--offwhite); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 36px 30px;
+      border-bottom: 3px solid transparent;
+      box-shadow: 0 2px 12px rgba(28,43,58,0.06);
+      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .service-card:hover {
+      border-bottom-color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(28,43,58,0.1);
+    }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(62,207,207,0.1);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .service-icon svg {
+      width: 24px; height: 24px;
+      stroke: var(--teal); fill: none; stroke-width: 1.8;
+    }
+
+    .service-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.2rem;
+      letter-spacing: 0.05em; color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 0.92rem; line-height: 1.7; color: var(--grey);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-bg-block {
+      width: 100%; padding-bottom: 90%;
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a4a 100%);
+      border-radius: 6px;
+      position: relative; overflow: hidden;
+    }
+
+    .about-bg-block::after {
+      content: '';
+      position: absolute; bottom: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(62,207,207,0.25);
+    }
+
+    .about-accent {
+      position: absolute; bottom: -20px; right: -20px;
+      width: 130px; height: 130px;
+      background: rgba(62,207,207,0.08);
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .about-accent-inner {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; color: var(--teal);
+      text-align: center; line-height: 1.1;
+    }
+
+    .about-accent-inner .big { font-size: 2rem; }
+    .about-accent-inner .small { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .about-m {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 9rem;
+      color: rgba(62,207,207,0.08);
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+
+    .about-content p {
+      font-size: 0.98rem; line-height: 1.8; color: var(--grey);
+      margin-bottom: 20px;
+    }
+
+    .about-pills {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px;
+    }
+
+    .pill {
+      padding: 6px 16px;
+      border: 1px solid rgba(62,207,207,0.35);
+      border-radius: 20px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--teal-dark);
+    }
+
+    /* ── WHY US ── */
+    .why { background: var(--navy-deep); }
+
+    .why .section-title { color: var(--white); }
+
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px; border: 1px solid rgba(62,207,207,0.12); border-radius: 6px; overflow: hidden;
+    }
+
+    .why-item {
+      padding: 40px 32px;
+      background: rgba(255,255,255,0.02);
+      border-right: 1px solid rgba(62,207,207,0.08);
+      transition: background 0.2s;
+    }
+
+    .why-item:last-child { border-right: none; }
+    .why-item:hover { background: rgba(62,207,207,0.05); }
+
+    .why-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: rgba(62,207,207,0.2); margin-bottom: 16px;
+    }
+
+    .why-item h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em;
+      color: var(--white); margin-bottom: 10px;
+    }
+
+    .why-item p {
+      font-size: 0.88rem; line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr; gap: 80px; align-items: start;
+      max-width: 600px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.4rem; letter-spacing: 0.04em;
+      color: var(--navy); margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      font-size: 0.95rem; line-height: 1.75; color: var(--grey); margin-bottom: 32px;
+    }
+
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px;
+    }
+
+    .contact-detail .cd-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: rgba(62,207,207,0.1); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .contact-detail .cd-icon svg {
+      width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 1.8;
+    }
+
+    .contact-detail .cd-text .label {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--grey); margin-bottom: 2px;
+    }
+
+    .contact-detail .cd-text .value {
+      font-size: 0.92rem; color: var(--navy); font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-deep);
+      padding: 48px 5%;
+      border-top: 1px solid rgba(62,207,207,0.1);
+    }
+
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem; color: rgba(255,255,255,0.35);
+    }
+
+    .footer-links {
+      display: flex; gap: 28px; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .about-visual { display: none; }
+      .contact-grid { gap: 40px; }
+      .nav-links { display: none; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* ── CLIENTS ── */
+    .clients { background: var(--offwhite); padding: 80px 5%; }
+
+    .clients-header { text-align: center; margin-bottom: 56px; }
+    .clients-header .section-sub { margin: 0 auto; }
+
+    .client-card {
+      max-width: 720px; margin: 0 auto;
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(28,43,58,0.08);
+      display: flex; align-items: center; gap: 48px;
+      padding: 48px 56px;
+      border-left: 4px solid var(--teal);
+    }
+
+    .client-logo-wrap {
+      flex-shrink: 0;
+      width: 160px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .client-divider {
+      width: 1px; background: #E2EAF0;
+      align-self: stretch; flex-shrink: 0;
+    }
+
+    .client-info .client-label {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .client-info h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.5rem; letter-spacing: 0.03em;
+      color: var(--navy); margin-bottom: 12px;
+    }
+
+    .client-info p {
+      font-size: 0.92rem; line-height: 1.75; color: var(--grey);
+    }
+
+    @media (max-width: 640px) {
+      .client-card { flex-direction: column; padding: 36px 28px; gap: 28px; }
+      .client-divider { width: 100%; height: 1px; align-self: auto; }
+      .client-logo-wrap { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="m-icon">
+      <svg viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 17V1L12 13L23 1V17" stroke="#3ECFCF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="wordmark">
+      <span class="word-medgen">MEDGEN</span>
+      <span class="word-industries">INDUSTRIES</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Accounting Consulting</p>
+      <h1>Financial Clarity<br>for Your <span>Business.</span></h1>
+      <p>Medgen Industries provides specialist accounting consulting — from debtors and creditors to stock management, finance operations, and management accounts compilation.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stat-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="label">Specialisation</div>
+          <div class="value">Debtors & Creditors</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="label">Deliverable</div>
+          <div class="value">Management Accounts</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="label">Operations</div>
+          <div class="value">Finance Dept. Support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <p class="section-eyebrow">What We Do</p>
+    <h2 class="section-title">Our Consulting Services</h2>
+    <p class="section-sub">Practical, hands-on financial consulting tailored to the needs of small and medium businesses.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Debtors Management</h3>
+        <p>We guide your team through best-practice accounts receivable processes — from structuring debtor listings and age analysis to establishing effective follow-up procedures that support healthy cash flow.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Creditors Management</h3>
+        <p>We advise on the processes and controls your team should have in place for accounts payable — covering creditor reconciliations, payment scheduling frameworks, and supplier statement matching procedures.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>Stock Management</h3>
+        <p>Maintain accurate inventory records, perform stock reconciliations, and support your team with reporting to minimise shrinkage and variances.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Finance Department Operations</h3>
+        <p>Support and optimise the day-to-day running of your finance department — from process documentation to transactional processing assistance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Management Accounts Compilation</h3>
+        <p>Monthly or quarterly management accounts compiled accurately and presented clearly — giving you the financial visibility to make informed decisions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Financial Reporting Support</h3>
+        <p>Assistance with trial balances, general ledger reviews, and supporting schedules to keep your reporting clean, timely, and audit-ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-bg-block">
+          <div class="about-m">M</div>
+        </div>
+        <div class="about-accent">
+          <div class="about-accent-inner">
+            <div class="big">2025</div>
+            <div class="small">Est.</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content">
+        <p class="section-eyebrow">About Us</p>
+        <h2 class="section-title">Grounded in Practice. Focused on Results.</h2>
+        <p>Medgen Industries was established in 2025 with a clear mission: to provide businesses with reliable, practical accounting consulting that makes a real difference to how their finances are managed.</p>
+        <p>We work closely with finance teams and business owners to bring order to accounts, improve operational efficiency, and ensure that financial information is accurate and accessible when it matters most.</p>
+        <p>Our approach is hands-on and collaborative — we integrate with your existing processes and help your team work smarter, not harder.</p>
+        <div class="about-pills">
+          <span class="pill">Debtors</span>
+          <span class="pill">Creditors</span>
+          <span class="pill">Stock</span>
+          <span class="pill">Finance Ops</span>
+          <span class="pill">Mgmt Accounts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="section-inner">
+    <p class="section-eyebrow" style="color: var(--teal);">Why Medgen</p>
+    <h2 class="section-title">What Sets Us Apart</h2>
+    <p class="section-sub" style="color: rgba(255,255,255,0.4); margin-bottom: 48px;">We bring focus, accuracy, and a genuine commitment to your financial health.</p>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <h4>Specialist Focus</h4>
+        <p>We focus on the areas that matter most — debtors, creditors, stock, and management accounts — so you get depth, not generalism.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <h4>Practical Approach</h4>
+        <p>We roll up our sleeves and work with your team directly, helping to fix problems and build better habits at the same time.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <h4>Clear Communication</h4>
+        <p>No jargon. We translate financial information into plain language so you always understand where your business stands.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <h4>Flexible Engagement</h4>
+        <p>Whether you need short-term support or an ongoing consulting relationship, we adapt to what your business actually needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <div class="section-inner">
+    <div class="clients-header">
+      <p class="section-eyebrow" style="justify-content: center;">Who We Work With</p>
+      <h2 class="section-title">Our Clients</h2>
+      <p class="section-sub">We are proud to support leading brands with their financial operations and accounting processes.</p>
+    </div>
+    <div class="client-card">
+      <div class="client-logo-wrap">
+        <!-- Mozambik logo recreated as inline SVG -->
+        <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" width="160" height="72">
+          <!-- Flame/leaf accent mark -->
+          <g transform="translate(91, 4)">
+            <path d="M9 0 C9 0 18 10 18 19 C18 28 13.5 33 9 34 C4.5 33 0 28 0 19 C0 10 9 0 9 0 Z" fill="#E8622A"/>
+            <path d="M9 10 C9 10 14 17 14 22 C14 27 11.5 30 9 31 C6.5 30 4 27 4 22 C4 17 9 10 9 10 Z" fill="#C44E1F"/>
+          </g>
+          <!-- MOZAMBIK wordmark -->
+          <text x="100" y="62"
+            font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif"
+            font-weight="800"
+            font-size="28"
+            letter-spacing="3"
+            text-anchor="middle"
+            fill="#1C2B3A">MOZAMBIK</text>
+          <!-- Tagline -->
+          <text x="100" y="78"
+            font-family="'Barlow', Arial, sans-serif"
+            font-weight="400"
+            font-size="9"
+            letter-spacing="4"
+            text-anchor="middle"
+            fill="#E8622A">RESTAURANT</text>
+        </svg>
+      </div>
+      <div class="client-divider"></div>
+      <div class="client-info">
+        <div class="client-label">Featured Client</div>
+        <h3>Mozambik Restaurant Franchise</h3>
+        <p>We provide accounting consulting support to the Mozambik restaurant franchise — one of South Africa's leading Afro-Porto dining brands, with over 35 stores nationally and locations across sub-Saharan Africa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-eyebrow">Get In Touch</p>
+        <h2 class="section-title">Let's Talk About Your Business</h2>
+        <p>Reach out via email to discuss how Medgen Industries can support your finance function. We'll get back to you promptly.</p>
+        <div class="contact-detail">
+          <div class="cd-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="cd-text">
+            <div class="label">Email</div>
+            <div class="value">info@medgenindustries.co.za</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="cd-text">
+            <div class="label">Location</div>
+            <div class="value">South Africa</div>
+          </div>
+        </div>
+        <a href="mailto:info@medgenindustries.co.za" class="btn-primary" style="margin-top: 32px; display: inline-block;">Email Us Now</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#home" class="nav-logo" style="text-decoration:none;">
+      <div class="m-icon" style="width:30px;height:30px;">
+        <svg viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+          <path d="M1 17V1L12 13L23 1V17" stroke="#3ECFCF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="wordmark">
+        <span class="word-medgen" style="font-size:1rem;">MEDGEN</span>
+        <span class="word-industries" style="font-size:0.5rem;">INDUSTRIES</span>
+      </div>
+    </a>
+    <p class="footer-copy">© 2025 Medgen Industries. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
